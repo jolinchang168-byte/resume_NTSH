@@ -32,7 +32,7 @@ def ai():
     return render_template('ai.html')
 
 @app.route('/ask')
-def ai():
+def ask():
     return render_template('ask.html')
 
 if __name__ == '__main__':
