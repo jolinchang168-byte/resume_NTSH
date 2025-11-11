@@ -58,6 +58,14 @@ def leadership():
 @app.route('/club')
 def club():
     return render_template('club.html')
+# 網頁/ask的處理
+@app.route('/ask', methods=['GET', 'POST'])
+def ask_question():
+if request.method == 'POST':
+q = request.form['question']
+a = questions_answers[q]
+return render_template('ask.html', question=q, answer=a)
+return render_template('ask.html', question="", answer="")
 
 @app.route('/electives')
 def electives():
@@ -73,19 +81,6 @@ def ask():
 
 if __name__ == '__main__':
     app.run(debug=True)
-# 首頁/的處理
-@app.route('/')
-def index():
-return render_template('index.html', QA=questions_answers)
-
-# 網頁/ask的處理
-@app.route('/ask', methods=['GET', 'POST'])
-def ask_question():
-if request.method == 'POST':
-q = request.form['question']
-a = questions_answers[q]
-return render_template('ask.html', question=q, answer=a)
-return render_template('ask.html', question="", answer="")
 
 if __name__ == '__main__':
 app.run(host='0.0.0.0', port=8080)
