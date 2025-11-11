@@ -1,47 +1,63 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ask a Question</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-        header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 10px;
-            text-align: center;
-        }
-        section {
-            margin: 20px;
-        }
-        .form-box {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>問答專區</title>
+  <style>
+    body {
+      font-family: "Noto Sans TC", Arial, sans-serif;
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #fafafa;
+    }
+    h1 {
+      color: #333;
+      text-align: center;
+    }
+    form {
+      text-align: center;
+      margin-top: 20px;
+    }
+    input[type="text"] {
+      width: 80%;
+      padding: 10px;
+      font-size: 1rem;
+    }
+    button {
+      padding: 8px 14px;
+      font-size: 1rem;
+      margin-left: 5px;
+    }
+    .result {
+      margin-top: 30px;
+      text-align: center;
+      background: #f2f2f2;
+      padding: 15px;
+      border-radius: 6px;
+    }
+    .home-link {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>提問</h1>
-    </header>
-    <section>
-        <div class="form-box">
-            <form action="/ask" method="post">
-                <label for="question">你的問題:</label><br>
-                <input type="text" id="question" name="question" value="{{ question }}"><br><br>
-                <label for="answer">答案:</label><br>
-                <input type="text" id="answer" name="answer" readonly value="{{ answer }}"><br><br>
-                <input type="submit" value="送出">
-                <input type="button" value="回首頁" onclick="window.location.href='/'">
-            </form>
-        </div>
-    </section>
+  <h1>問答專區</h1>
+  <form method="post" action="/ask">
+    <input type="text" name="question" placeholder="請輸入中文或英文單字" value="{{ question or '' }}" required />
+    <button type="submit">翻譯</button>
+  </form>
+
+  {% if question %}
+  <div class="result">
+    <strong>你輸入的單字：</strong> {{ question }}<br>
+    <strong>翻譯結果：</strong> {{ answer }}
+  </div>
+  {% endif %}
+
+  <a href="/" class="home-link">🏠 回首頁</a>
 </body>
 </html>
